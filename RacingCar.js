@@ -1,7 +1,7 @@
 var myTimer;
 var defaultRotatValue = 30;
-var defaultSpeedIncriment = 0.1;
-var defaultSpeedStart = 0.3;
+var defaultSpeedIncriment = 1.5;
+var defaultSpeedStart = 2;
 var timeCount = 0;
 var car = { x: 130, y: 65 };
 var lineLength = 30;
@@ -12,9 +12,9 @@ var Bane = new Image();
 var aktuelColor = "black";
 //----------------------------------------
 var speed = defaultSpeedStart;
-var distantFront;
-var distantLeft;
-var distantRight;
+var distanceFront;
+var distanceLeft;
+var distanceRight;
 
 function startAll()
 {
@@ -280,13 +280,13 @@ function drawEveryThing() {
     ctx.fillText("Left='a' Right='d' Fast='w' Slow='s'", xpos - 40, 20);
     ctx.fillText("", xpos, 40);
 
-    distantFront = dist(distFarward.x, distFarward.y, justInFront.x, justInFront.y);
-    distantLeft = dist(distLeft.x, distLeft.y, justInFront.x, justInFront.y);
-    distantRight = dist(distRight.x, distRight.y, justInFront.x, justInFront.y);
+    distanceFront = dist(distFarward.x, distFarward.y, justInFront.x, justInFront.y);
+    distanceLeft = dist(distLeft.x, distLeft.y, justInFront.x, justInFront.y);
+    distanceRight = dist(distRight.x, distRight.y, justInFront.x, justInFront.y);
     ctx.fillText("Car x = " + car.x.toFixed(0) + " Car y = " + car.y.toFixed(0), xpos, ypos );
-    ctx.fillText("Distance front = " + Math.ceil(distantFront), xpos, ypos + 20);
-    ctx.fillText("Distance left = " + Math.ceil(distantLeft), xpos, ypos + 40);
-    ctx.fillText("Distance right = " + Math.ceil(distantRight), xpos, ypos + 60);
+    ctx.fillText("Distance front = " + Math.ceil(distanceFront), xpos, ypos + 20);
+    ctx.fillText("Distance left = " + Math.ceil(distanceLeft), xpos, ypos + 40);
+    ctx.fillText("Distance right = " + Math.ceil(distanceRight), xpos, ypos + 60);
     ctx.fillText("Time = " + timeCount, xpos, ypos + 80);
     ctx.fillText("Speed = " + speed.toFixed(2), xpos, ypos + 100);
 

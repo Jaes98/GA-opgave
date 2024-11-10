@@ -59,18 +59,21 @@
     }
     //--------IN: use these 4 inputs to calculate the output.---------------------
     // speed
-    // distantFront;
-    // distantLeft;
-    // distantRight;
+    // distanceFront;
+    // distanceLeft;
+    // distanceRight;
 
     //--------The Genetic Algorithm Network----------------------------------------
     try
     {
       // ### Find en bedre måde at udregne outRotate ud fra data som speed og distance samt gener
+      let rightLeftDelta = distanceLeft - distanceRight;
       var outRotate = population[0].chromosome[0];
+      
+      outRotate -= rightLeftDelta;
 
       // ### Find en bedre måde at udregne outSpeed ud fra data som speed og distance samt gener
-      var outSpeed = population[0].chromosome[1];
+      var outSpeed = population[0].chromosome[1]; // optional
 
       //Postive is Right and Negative is Left.
       rotateCar(outRotate);
@@ -90,22 +93,25 @@
 
   // 
   // ### Lav noget kode som måler fitness (altså, hvor bilen får
-  // poeng for at have kommet et vist stykke fremad)
+  // point for at have kommet et vist stykke fremad)
 
   // ### Lav kode, som håndterer generationer:
   // hvis det er første omgang, så lav en random generation via GA_CreateRandomGeneration()
   // ellers lav en forbedret generation
 
 
-  function GA_CreateNewPopulation()
-  {
+  function GA_CreateNewPopulation() {
     console.log("New Population created");
+    if (population.length === 0) {
+        GA_CreateRandomGeneration();
+    } else {
+        GA_EvolvePopulation();
+    }
+}
 
-    // First time we must create a Random Generation.
-    // So we call this function the first time we run. The second time
-    // you should run the GA algoritm, that you have to create.
-    GA_CreateRandomGeneration();
-  }
+function GA_EvolvePopulation(params) {
+  
+}
 
   var population = [];
   var populationNumber = 6;
@@ -125,12 +131,19 @@
       }
       population.push(obj);
     }
+    console.log(population);
   }
   function carCrashed()
   {
     ctx.fillText("Car has crashed", 10, 20);
-    //calculateFitnessForCar();
+    calculateFitnessForCar();
     setTimeout(newGame, 1000);
+  }
+
+  function calculateFitnessForCar() {
+    // ### Lav noget kode som måler fitness (altså, hvor bilen får
+    // point for at have kommet et vist stykke fremad)
+    
   }
 
 
@@ -142,6 +155,7 @@
     ntx.clearRect(0, 0, canvas.width, canvas.height);
     ntx.font = "bold 14px Arial";
     ntx.fillText("Active population = " + activePopulation + " of " + populationNumber, 200, 20);
+    ntx.fillText("Fitness = " + population[0], 200, 60); // ikke færdig
   }
 
 </Script>
